@@ -33,13 +33,12 @@
 			<input type="text" class="form-control"
 				id="carMake" name="carMake" th:field="*{carMake}" required>
 		</div> -->
-
+		
 		<div class="form-group">
-			<label for="carMake">Car Make:</label> <select th:field="*{carMake}"
-				class="form-control">
-				<option value="">Select a car make:</option>
-				<option th:each="make : ${carMakes}" th:value="${make}"
-					th:text="${make}"></option>
+			<label for="carMake">Car Make:</label> 
+			<select th:field="*{carMake}" class="form-control">
+			    <option value="">Select a car make:</option>
+			    <option th:each="make : ${carMakes}" th:value="${make}" th:text="${make}"></option>
 			</select>
 		</div>
 
@@ -47,13 +46,14 @@
 			<label for="carModel">Car Model:</label> <input type="text"
 				id="carModel" class="form-control" name="carModel" th:field="*{carModel}" required>
 		</div> -->
-
+		
 		<div class="form-group">
-			<label for="carMake">Car Model:</label> <select
-				th:field="*{carModel}" class="form-control">
-				<option value="">Select a car model...</option>
-				<option th:each="model : ${carModels}" th:value="${model}"
-					th:text="${model.name()} + ' (' + ${model.getMake().name()} + ')'"></option>
+		<label for="carMake">Car Model:</label> 
+			<select th:field="*{carModel}" class="form-control">
+			    <option value="">Select a car model...</option>
+			    <option th:each="model : ${carModels}" 
+			            th:value="${model}" 
+			            th:text="${model.name()} + ' (' + ${model.getMake().name()} + ')'"></option>
 			</select>
 		</div>
 
@@ -61,13 +61,14 @@
 			<label for="yearMade">Year:</label> <input type="number"
 				id="yearMade" class="form-control" name="yearMade" th:field="*{yearMade}" required>
 		</div> -->
-
+		
 		<div class="form-group">
-			<label for="yearMade">Year:</label> <select th:field="*{yearMade}"
-				class="form-control">
-				<option value="">Select a year...</option>
-				<option th:each="year : ${years}" th:value="${year}"
-					th:text="${year}"></option>
+		<label for="yearMade">Year:</label>
+			<select th:field="*{yearMade}" class="form-control">
+			    <option value="">Select a year...</option>
+			    <option th:each="year : ${years}" 
+			            th:value="${year}" 
+			            th:text="${year}"></option>
 			</select>
 		</div>
 
@@ -75,25 +76,24 @@
 			<label>Service Type:</label> <input type="text" class="form-control"
 				th:field="*{serviceType}" required>
 		</div> -->
-
+		
 		<div class="form-group">
-			<label>Service Type:</label> <select th:field="*{serviceType}"
-				class="form-control">
-				<option value="">Select a service...</option>
-				<option th:each="service : ${services}" th:value="${service}"
-					th:text="${service.getName()}"></option>
+		<label>Service Type:</label>
+			<select th:field="*{serviceType}" class="form-control">
+			    <option value="">Select a service...</option>
+			    <option th:each="service : ${services}" 
+			            th:value="${service}" 
+			            th:text="${service.getName()}"></option>
 			</select>
 		</div>
-
+		
 		<p class="form-group">
 			<label>Additional Details:</label>
 			<textarea th:field="*{additionalDetails}" class="form-control"></textarea>
 		</p>
 
-		<button type="submit" class="btn btn-primary">
-			<a th:href="@{/checkout}">Checkout and Pay</a>
-		</button>
 
+		<button type="submit" class="btn btn-primary">Book</button>
 	</form>
 	<hr>
 </body>

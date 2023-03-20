@@ -32,5 +32,5 @@ git checkout -b staging
 
 ### Pull all the latest changes from Staging:
 ```
-- git pull origin staging
+git pull origin staging
 ```

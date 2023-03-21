@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Payment Success</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+}
+
+h1 {
+	font-size: 36px;
+	margin-bottom: 20px;
+}
+
+p {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+#transactionId {
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<h1>Payment Success</h1>
+	<p>Your payment was successful!</p>
+	<p>
+		Transaction ID: <span id="transactionId"></span>
+	</p>
+	<script>
+		var transactionId = new URLSearchParams(window.location.search)
+				.get('paymentId');
+		document.getElementById('transactionId').innerText = transactionId;
+	</script>
+</body>
+</html>

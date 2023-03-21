@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body class="container">
+<hr>
+   <!--   -->
+    <div th:if="${customers.empty}">
+    	Sorry, There are no customers yet.<br>
+    	<b>Be our first customer.</b>
+    </div>
+    
+    <div th:if="${customers != null and !customers.empty}">
+    	
+    	<p class="display-4">Customers</p>
+    	<table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.name}"></td>
+                <td th:text="${customer.email}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td th:text="${customer.address}"></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <br>
+    <a href="/customers/add">Be a customer</a>
+    <hr>
+</body>
+</html>

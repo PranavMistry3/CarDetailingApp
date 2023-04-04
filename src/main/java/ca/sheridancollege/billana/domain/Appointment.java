@@ -1,5 +1,6 @@
 package ca.sheridancollege.billana.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,6 +47,14 @@ public class Appointment {
     @Column(nullable = false)
     private String yearMade;
 
+    @OneToOne
+	@JoinColumn(name = "vehicle_id")
+	private Vehicle vechicle;
+	
+	@OneToOne
+	@JoinColumn(name = "detailer_id")
+	private Detailer detailer;
+    
     @Column(nullable = false)
     private String serviceType;
 

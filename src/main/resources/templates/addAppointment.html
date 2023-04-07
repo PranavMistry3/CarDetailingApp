@@ -89,10 +89,91 @@
 			<label>Additional Details:</label>
 			<textarea th:field="*{additionalDetails}" class="form-control"></textarea>
 		</p>
+		<div id="smart-button-container">
+			<div style="text-align: center;">
+				<div id="paypal-button-container"></div>
+			</div>
+		</div>
+		<script
+			src="https://www.paypal.com/sdk/js?client-id=AYqhZHK_6GcUbN0rO1wkBR19vbHm6lFIWCF-AIp71Vi6a1yOgL4Dzr9WxbLrz1ute6S2k8U_tQa1CdRC&enable-funding=venmo&currency=CAD"
+			data-sdk-integration-source="button-factory"></script>
+		<script>
+			function initPayPalButton() {
+				paypal
+						.Buttons(
+								{
+									style : {
+										shape : 'rect',
+										color : 'gold',
+										layout : 'vertical',
+										label : 'paypal',
 
-		<button type="submit" class="btn btn-primary">
-			<a th:href="@{/checkout}">Checkout and Pay</a>
-		</button>
+									},
+
+									createOrder : function(data, actions) {
+										return actions.order
+												.create({
+													purchase_units : [ {
+														"amount" : {
+															"currency_code" : "CAD",
+															"value" : 1.13,
+															"breakdown" : {
+																"item_total" : {
+																	"currency_code" : "CAD",
+																	"value" : 1
+																},
+																"shipping" : {
+																	"currency_code" : "CAD",
+																	"value" : 0
+																},
+																"tax_total" : {
+																	"currency_code" : "CAD",
+																	"value" : 0.13
+																}
+															}
+														}
+													} ]
+												});
+									},
+
+									onApprove : function(data, actions) {
+										return actions.order
+												.capture()
+												.then(
+														function(orderData) {
+
+															// Full available details
+															console
+																	.log(
+																			'Capture result',
+																			orderData,
+																			JSON
+																					.stringify(
+																							orderData,
+																							null,
+																							2));
+
+															// Show a success message within this page, e.g.
+															const element = document
+																	.getElementById('paypal-button-container');
+															element.innerHTML = '';
+															element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+															// Or go to another URL:  actions.redirect('thank_you.html');
+
+														});
+									},
+
+									onError : function(err) {
+										console.log(err);
+									}
+								}).render('#paypal-button-container');
+			}
+			initPayPalButton();
+		</script>
+
+		<!-- <a href="/checkout" class="btn btn-primary">Checkout and Pay via Pay Pal</a>
+		<a href="/charge" class="btn btn-primary">Check and Pay via Stripe</a> -->
 
 	</form>
 	<hr>

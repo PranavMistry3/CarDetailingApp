@@ -53,16 +53,21 @@ button[type="submit"]:hover {
 </style>
 </head>
 <body>
+
 	<h1>Checkout</h1>
 	<form action="/pay" method="post">
-		<label for="amount">Amount:</label> <input type="text" name="amount"
-			id="amount" required> <label for="currency">Currency:</label>
-		<input type="text" name="currency" id="currency" value="USD" required>
+		<label for="amount">Amount:</label> <input type="number" name="amount"
+			id="amount" step="0.01" min="0" required> <br> <label
+			for="currency">Currency:</label> <select name="currency"
+			id="currency" required>
+			<option value="USD">USD</option>
+			<option value="CAD">CAD</option>
+			<option value="EUR">EUR</option>
+		</select> <br>
 		<button type="submit">Pay with PayPal</button>
-		<div class="info">
-			<p>Accepted currencies: USD, EUR, GBP</p>
-			<p>Please enter a valid amount (e.g. 12.34)</p>
-		</div>
 	</form>
+	<br>
+	    <a href="/">Home</a>
+	    
 </body>
 </html>

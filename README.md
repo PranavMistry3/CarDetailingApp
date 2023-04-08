@@ -14,7 +14,7 @@ If there are no issues with the merged staging branch which will include all of 
 
 ## Initial Setup
 
-### Initializing Git in Eclipse
+### Initializing Git in Eclipse:
 Open Terminal in Eclipse
 write the following command
 ```

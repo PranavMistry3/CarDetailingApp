@@ -34,8 +34,8 @@
                     <td th:text="${appointment.carMake}"></td>
                     <td th:text="${appointment.carModel}"></td>
                     <td th:text="${appointment.yearMade}"></td>
-                    <td th:text="${appointment.serviceType}"></td>
-                    <td th:text="${appointment.additionalDetails}"></td>
+                    <td th:text="${appointment.servicePackage.service_type}"></td>
+                    <td th:text="${appointment.servicePackage.description}"></td>
                 </tr>
             </th:block>
         </tbody>

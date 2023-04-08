@@ -55,8 +55,9 @@ public class Appointment {
 	@JoinColumn(name = "detailer_id")
 	private Detailer detailer;
     
-    @Column(nullable = false)
-    private String serviceType;
+	@OneToOne
+	@JoinColumn(name = "service_id")
+	private ServicePackage servicePackage;
 
     @Lob
     private String additionalDetails;

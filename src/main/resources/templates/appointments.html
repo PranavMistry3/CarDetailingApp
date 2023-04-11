@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>Appointments</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Appointments</title>
 </head>
 <body class="container">
-<hr>
+	<hr>
 
 	<div th:if="${appointments.empty}">
-    	<b>Sorry, There are no appointments yet.</b>
-    </div><br>
-    
-    <div th:if="${appointments != null and !appointments.empty}">
-    	<p class="display-4">Appointments</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date and Time</th>
-                <th>Customer</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Year</th>
-                <th>Service Type</th>
-                <th>Additional Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            <th:block th:each="appointment : ${appointments}">
-                <tr>
-                    <td th:text="${appointment.appointmentDateTime}"></td>
-                    <td th:text="${appointment.customer.name}"></td>
-                    <td th:text="${appointment.carMake}"></td>
-                    <td th:text="${appointment.carModel}"></td>
-                    <td th:text="${appointment.yearMade}"></td>
-                    <td th:text="${appointment.serviceType}"></td>
-                    <td th:text="${appointment.additionalDetails}"></td>
-                </tr>
-            </th:block>
-        </tbody>
-    </table>
-    </div>
-    <a th:href="@{/appointments/add}">Book a Appointment</a>
-    <hr>
+		<b>Sorry, There are no appointments yet.</b>
+	</div>
+	<br>
+
+	<div th:if="${appointments != null and !appointments.empty}">
+		<p class="display-4">Appointments</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Date and Time</th>
+					<th>Customer</th>
+					<th>Make</th>
+					<th>Model</th>
+					<th>Year</th>
+					<th>Service Type</th>
+					<th>Additional Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="appointment : ${appointments}">
+					<tr>
+						<td th:text="${appointment.appointmentDateTime}"></td>
+						<td th:text="${appointment.customer.name}"></td>
+						<td th:text="${appointment.carMake}"></td>
+						<td th:text="${appointment.carModel}"></td>
+						<td th:text="${appointment.yearMade}"></td>
+						<td th:text="${appointment.serviceType}"></td>
+						<td th:text="${appointment.additionalDetails}"></td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+	<a th:href="@{/appointments/add}">Book a Appointment</a>
+	<hr>
 </body>
 </html>

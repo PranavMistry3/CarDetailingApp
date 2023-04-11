@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PayPal Payment</title>
+</head>
+<body>
+	<h1>PayPal Payment Form</h1>
+	<form action="/process-payment" method="POST">
+		<label for="amount">Amount:</label>
+		<input type="number" name="amount" id="amount" required>
+
+		<label for="currency">Currency:</label>
+		<select name="currency" id="currency" required>
+			<option value="USD">USD</option>
+			<option value="CAD">CAD</option>
+			<option value="EUR">EUR</option>
+		</select>
+
+		<label for="cancel_url">Cancel URL:</label>
+		<input type="text" name="cancel_url" id="cancel_url" required>
+
+		<label for="success_url">Success URL:</label>
+		<input type="text" name="success_url" id="success_url" required>
+
+		<button type="submit">Pay with PayPal</button>
+	</form>
+</body>
+</html>

@@ -1,73 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Checkout</title>
+<meta charset="UTF-8">
+<title>Paypal Checkout</title>
 <style>
 body {
 	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+	text-align: center;
 }
 
 h1 {
-	font-size: 36px;
-	margin-bottom: 20px;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
 }
 
 form {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+	margin: 0 auto;
+	width: 400px;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
 }
 
 label {
-	font-size: 20px;
+	display: block;
 	margin-bottom: 10px;
+	font-weight: bold;
 }
 
-input[type="text"] {
-	font-size: 20px;
+input[type="text"], select {
+	width: 100%;
 	padding: 10px;
-	border: 2px solid #ccc;
-	border-radius: 5px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
 	margin-bottom: 20px;
 }
 
-button[type="submit"] {
-	font-size: 24px;
+input[type="submit"] {
 	background-color: #0070ba;
 	color: #fff;
 	border: none;
+	border-radius: 3px;
 	padding: 10px 20px;
-	border-radius: 5px;
+	font-size: 16px;
 	cursor: pointer;
 }
 
-button[type="submit"]:hover {
-	background-color: #005a9e;
+input[type="submit"]:hover {
+	background-color: #005d9c;
 }
 
-.info {
-	font-size: 16px;
-	margin-top: 20px;
+button.paypal-button {
+	display: block;
+	align-items: center;
 }
 </style>
 </head>
 <body>
+	<h1>Paypal Checkout</h1>
 
-	<h1>Checkout</h1>
-	<form action="/pay" method="post">
-		<label for="amount">Amount:</label> <input type="number" name="amount"
-			id="amount" step="0.01" min="0" required> <br> <label
-			for="currency">Currency:</label> <select name="currency"
-			id="currency" required>
-			<option value="USD">USD</option>
+	<form method="post" action="/checkout">
+		<label for="total">Total Amount:</label> <input type="text" id="total"
+			name="total"><br> <label for="currency">Currency:</label>
+		<select id="currency" name="currency">
 			<option value="CAD">CAD</option>
-			<option value="EUR">EUR</option>
-		</select> <br>
-		<button type="submit">Pay with PayPal</button>
+		</select><br>
+
 	</form>
 	<br>
-	    <a href="/">Home</a>
-	    
+	<br>
+	<script
+		src="https://www.paypal.com/sdk/js?client-id=AcFnwUIpOFwyjLz3DbvQOJvZcmN-1uFQE2qVVMFtNJNBcpbui_MYGXPdpwmFXQNK4UVaFTSoh8WDv-X_&currency=CAD"></script>
+	<script>
+		// Add your Paypal client id and currency here
+		paypal.Buttons().render('body');
+	</script>
 </body>
 </html>

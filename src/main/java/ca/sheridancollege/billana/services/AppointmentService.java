@@ -35,6 +35,11 @@ public class AppointmentService {
     public void deleteAppointment(Long id) {
         appointmentRepository.deleteById(id);
     }
+    
+    @Transactional
+    public List<Appointment> findAppointmentsByCustomerId(Long customerId) {
+    	return appointmentRepository.findAppointmentsByCustomerId(customerId);
+    }
 
 }
 

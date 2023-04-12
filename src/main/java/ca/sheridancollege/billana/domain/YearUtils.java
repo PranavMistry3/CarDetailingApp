@@ -9,7 +9,7 @@ public class YearUtils {
 	public static List<Integer> getAllYears() {
         List<Integer> years = new ArrayList<>();
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        for (int year = 1900; year <= currentYear; year++) {
+        for (int year = 1995; year <= currentYear; year++) {
             years.add(year);
         }
         return years;

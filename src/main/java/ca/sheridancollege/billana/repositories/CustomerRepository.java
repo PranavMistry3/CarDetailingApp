@@ -7,6 +7,8 @@ import ca.sheridancollege.billana.domain.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
+	
+	public Customer findByEmail(String email);
 
 }
 

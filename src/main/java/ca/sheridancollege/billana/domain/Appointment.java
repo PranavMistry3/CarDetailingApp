@@ -1,6 +1,5 @@
 package ca.sheridancollege.billana.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -12,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,28 +36,46 @@ public class Appointment {
     @JoinColumn(name = "customer_id")
     private Customer customer;
     
-    @Column(nullable = false)
-    private String carMake;
+//    @Column(nullable = false)
+//    private String carMake;
+//
+//    @Column(nullable = false)
+//    private String carModel;
+//    
+//    @Column(nullable = false)
+//    private String yearMade;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
 
     @Column(nullable = false)
-    private String carModel;
-    
-    @Column(nullable = false)
-    private String yearMade;
-
-    @OneToOne
-	@JoinColumn(name = "vehicle_id")
-	private Vehicle vechicle;
-	
-	@OneToOne
-	@JoinColumn(name = "detailer_id")
-	private Detailer detailer;
-    
-	@OneToOne
-	@JoinColumn(name = "service_id")
-	private ServicePackage servicePackage;
+    private String serviceType;
 
     @Lob
     private String additionalDetails;
+    
+//    @Override
+//    public String toString() {
+//        return "Appointment{" +
+//                "id=" + id +
+//                ", appointmentDateTime=" + appointmentDateTime +
+//                ", customer=" + customer +
+//                ", vehicle=" + vehicle +
+//                ", serviceType='" + serviceType + '\'' +
+//                ", additionalDetails='" + additionalDetails + '\'' +
+//                '}';
+//    }
+    
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", appointmentDateTime=" + appointmentDateTime +
+                ", serviceType='" + serviceType + '\'' +
+                ", additionalDetails='" + additionalDetails + '\'' +
+                '}';
+    }
+
 }
 

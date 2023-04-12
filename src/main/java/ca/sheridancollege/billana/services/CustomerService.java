@@ -20,16 +20,21 @@ public class CustomerService {
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
+    
+    public Customer findCustomerByEmail(String email) {
+    	return customerRepository.findByEmail(email);
+    }
 
-    @Transactional(readOnly = true)
-    public Optional<Customer> getCustomerById(Long id) {
-        return customerRepository.findById(id);
+//    @Transactional(readOnly = true)
+    public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id).get();
     }
 
     @Transactional
     public Customer saveCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
+    
 
     @Transactional
     public void deleteCustomer(Long id) {

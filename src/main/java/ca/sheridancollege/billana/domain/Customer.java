@@ -40,12 +40,9 @@ public class Customer {
     private String address;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List <Vehicle> vehicles;
-	
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List <Payment> payments;
+    private List<Appointment> appointments;
     
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<Appointment> appointments;
+    private List<Vehicle> vehicles;
 }
 

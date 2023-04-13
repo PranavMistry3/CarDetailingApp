@@ -2,51 +2,64 @@ package ca.sheridancollege.billana.web.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
 import ca.sheridancollege.billana.services.PaypalService;
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class CheckoutController {
-	private final PaypalService paypalService;
 
 	@Autowired
-	public CheckoutController(PaypalService paypalService) {
-		this.paypalService = paypalService;
-	}
+	private PaypalService paypalService;
 
 	@GetMapping("/checkout")
-	public String showCheckout() {
+	public String checkout(Model model) {
+		// Render the checkout page
 		return "checkout";
 	}
 
-	@PostMapping("/pay")
-	public String pay(@RequestParam("amount") Double amount, @RequestParam("currency") String currency,
-			HttpServletRequest request, RedirectAttributes redirectAttributes) {
-		String cancelUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-				+ request.getContextPath() + "/cancel";
-		String successUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-				+ request.getContextPath() + "/success";
+	@PostMapping("/checkout")
+	public String pay(Model model) {
+		return "success";
+		/*
+		 * try { // Create a new PayPal payment Payment payment =
+		 * paypalService.createPayment(total, currency);
+		 * 
+		 * // Get the approval URL and redirect the user to PayPal to complete the
+		 * payment String approvalUrl = payment.getLinks().stream().filter(link ->
+		 * link.getRel().equals("approval_url")) .findFirst().orElseThrow(() -> new
+		 * PayPalRESTException("No approval_url found in Payment")) .getHref(); return
+		 * "success";
+		 * 
+		 * } catch (PayPalRESTException e) { model.addAttribute("error",
+		 * e.getMessage()); return "error"; }
+		 */
+	}
 
+	@GetMapping("/success")
+	public String success(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,
+			Model model) {
 		try {
-			Payment payment = paypalService.createPayment(amount, currency, cancelUrl, successUrl);
-			for (Links links : payment.getLinks()) {
-				if (links.getRel().equals("approval_url")) {
-					return "redirect:" + links.getHref();
-				}
-			}
-		} catch (PayPalRESTException e) {
-			redirectAttributes.addFlashAttribute("error", e.getMessage());
-		}
-		return null;
+			// Execute the PayPal payment and get the details
+			Payment payment = paypalService.executePayment(paymentId, payerId);
+			model.addAttribute("payment", payment);
+			return "success";
 
+		} catch (PayPalRESTException e) {
+			model.addAttribute("error", e.getMessage());
+			return "error";
+		}
+	}
+
+	@GetMapping("/cancel")
+	public String cancel() {
+		// Render the cancel page
+		return "cancel";
 	}
 }

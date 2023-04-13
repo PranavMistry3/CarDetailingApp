@@ -17,8 +17,8 @@ import com.paypal.base.rest.PayPalRESTException;
 
 @Service
 public class PaypalService {
-	private static final String CLIENT_ID = "AUG8DEcgZB_f_z7IxPq7c6x4DUT9ZpUKKWSd_8ePBzCKm0UtYsl3PJlYYPThP1zWHyJ2IWrmG92fACa-\r\n";
-	private static final String CLIENT_SECRET = "EMAH1Cybq0O_Xt9ju8jocV-zz-V9zLHWFbQrHYUI8vTxd7LMdSvNNpqFumRKxjCzUoiBXtePxNRxGDmf";
+	private static final String CLIENT_ID = "AcFnwUIpOFwyjLz3DbvQOJvZcmN-1uFQE2qVVMFtNJNBcpbui_MYGXPdpwmFXQNK4UVaFTSoh8WDv-X_";
+	private static final String CLIENT_SECRET = "ED6gBCnn0SxiMr7UhwfxamwYxkjnZTUWFGBepcygxv9Nhz_pmJIyp-v6edt4WI_0oJvAd9FSrmRekhlA";
 	private static final String MODE = "sandbox"; // or "live" for production
 
 	private final APIContext apiContext;
@@ -28,7 +28,7 @@ public class PaypalService {
 		apiContext = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
 	}
 
-	public Payment createPayment(Double total, String currency, String cancelUrl, String successUrl)
+	public Payment createPayment(Double total, String currency)
 			throws PayPalRESTException {
 		// Set payment details
 		Amount amount = new Amount();
@@ -44,8 +44,6 @@ public class PaypalService {
 
 		// Set redirect URLs
 		RedirectUrls redirectUrls = new RedirectUrls();
-		redirectUrls.setCancelUrl(cancelUrl);
-		redirectUrls.setReturnUrl(successUrl);
 
 		// Set payment details
 		Payment payment = new Payment();

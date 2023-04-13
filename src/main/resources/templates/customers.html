@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Customers</title>
+</head>
+<body class="bg-light">
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+			<!-- Navbar content -->
+			<a class="navbar-brand" href="#">DetailMyRide</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link" href="/index">Home</a>
+					</li>
+					<li class="nav-item active"><a class="nav-link"
+						href="/customers">Customers</a></li>
+					<li class="nav-item"><a class="nav-link" href="/appointments">Appointments</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<hr>
+	<!--   -->
+	<div th:if="${customers.empty}" class="container">
+		Sorry, There are no customers yet.<br> <b>Be our first
+			customer.</b>
+	</div>
+
+	<div th:if="${customers != null and !customers.empty}"
+		class="container">
+
+		<p class="display-4">Customers</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Phone</th>
+					<th scope="col">Address</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${customers}">
+					<td th:text="${customer.id}"></td>
+					<td th:text="${customer.name}"></td>
+					<td th:text="${customer.email}"></td>
+					<td th:text="${customer.phone}"></td>
+					<td th:text="${customer.address}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<div class="container">
+		<a href="/customers/add">Be a customer</a>
+	</div>
+
+	<hr>
+</body>
+</html>
